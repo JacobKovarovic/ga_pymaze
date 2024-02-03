@@ -1,6 +1,8 @@
 import time
 import random
 import logging
+import ga
+from functools import partial
 from maze import Maze
 
 logging.basicConfig(level=logging.DEBUG)
@@ -47,17 +49,39 @@ class GeneticAlgorithm(Solver):
         super().__init__(maze, neighbor_method, quiet_mode)
         self.name = "Genetic Alorgithm"
 
+    '''def fitness(genome: Genome, things: maze) -> int:
+        if len(genome)/2 != len(things):
+            raise ValueError("Half the genome must be the length of the maze")
+        distance = 0
+
+        for i, thing in enumerate(things):
+            if genome[i] == 1:
+                weight += thing.weight
+                value += thing.value
+
+            if weight > weight_limit:
+                return 0
+
+        return value'''
+    
     def solve(self):
         logging.debug("Class DepthFirstBacktracker solve called")
         k_curr, l_curr = self.maze.entry_coor      # Where to start searching
         self.maze.grid[k_curr][l_curr].visited = True     # Set initial cell to visited
         visited_cells = list()                  # Stack of visited cells for backtracking
         path = list()                           # To track path of solution and backtracking cells
+        k_last, l_last = self.maze.exit_coor  #Exit
         if not self.quiet_mode:
             print("\nSolving the maze with a genetic algorithm...")
 
         time_start = time.time()
-        #Use GA class
+        populations, generations = genetic.run_evolution(
+            populate_func=partial(ga.generate_population, size=10, genome_length=100),
+            fitness_func=partial(fitness, final_loc, exit_loc),
+            fitness_limit=0,
+            generation_limit=20
+        )
+        
         return path
 
 class BreadthFirst(Solver):

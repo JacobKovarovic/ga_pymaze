@@ -202,3 +202,4 @@ class Maze(object):
             depth_first_recursive_backtracker(self, start_coor)
         elif algorithm == "bin_tree":
             binary_tree(self, start_coor)
+        #TODO add ga?

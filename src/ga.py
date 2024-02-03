@@ -38,6 +38,7 @@ def mutation(genome: Genome, num: int = 1, probability: float = 0.5) -> Genome:
         genome[index] = genome[index] if random() > probability else abs(genome[index] - 1)
     return genome
 
+#def fitness_func(genome: Genome,)
 
 def population_fitness(population: Population, fitness_func: FitnessFunc) -> int:
     return sum([fitness_func(genome) for genome in population])
