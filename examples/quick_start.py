@@ -1,6 +1,10 @@
-from __future__ import absolute_import
-from src.maze_manager import MazeManager
-from src.maze import Maze
+#from __future__ import absolute_import
+import sys
+import os
+src_path = os.path.abspath(os.path.join(os.path.dirname(__file__),'..','src'))
+sys.path.append(src_path)
+from maze_manager import MazeManager
+from maze import Maze
 
 
 if __name__ == "__main__":

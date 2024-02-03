@@ -1,7 +1,7 @@
 import time
 import random
 import logging
-from src.maze import Maze
+from maze import Maze
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -47,7 +47,6 @@ class BreadthFirst(Solver):
         super().__init__(maze, neighbor_method, quiet_mode)
 
     def solve(self):
-
         """Function that implements the breadth-first algorithm for solving the maze. This means that
                 for each iteration in the outer loop, the search visits one cell in all possible branches. Then
                 moves on to the next level of cells in each branch to continue the search."""
@@ -57,7 +56,7 @@ class BreadthFirst(Solver):
         path = list()  # To track path of solution cell coordinates
 
         print("\nSolving the maze with breadth-first search...")
-        time_start = time.clock()
+        time_start = time.perf_counter()
 
         while True:  # Loop until return statement is encountered
             next_level = list()
@@ -70,7 +69,7 @@ class BreadthFirst(Solver):
                 if (k_curr, l_curr) == self.maze.exit_coor:  # Exit if current cell is exit cell
                     if not self.quiet_mode:
                         print("Number of moves performed: {}".format(len(path)))
-                        print("Execution time for algorithm: {:.4f}".format(time.clock() - time_start))
+                        print("Execution time for algorithm: {:.4f}".format(time.perf_counter() - time_start))
                     return path
 
                 neighbour_coors = self.maze.find_neighbours(k_curr, l_curr)  # Find neighbour indicies
@@ -115,7 +114,7 @@ class BiDirectional(Solver):
 
         if not self.quiet_mode:
             print("\nSolving the maze with bidirectional depth-first search...")
-        time_start = time.clock()
+        time_start = time.perf_counter()
 
         while True:   # Loop until return statement is encountered
             neighbours_kl = self.maze.find_neighbours(k_curr, l_curr)    # Find neighbours for first search
@@ -156,7 +155,7 @@ class BiDirectional(Solver):
                 path = [p_el for p_tuple in zip(path_kl, path_pq) for p_el in p_tuple]  # Zip paths
                 if not self.quiet_mode:
                     print("Number of moves performed: {}".format(len(path)))
-                    print("Execution time for algorithm: {:.4f}".format(time.clock() - time_start))
+                    print("Execution time for algorithm: {:.4f}".format(time.perf_counter() - time_start))
                 logging.debug("Class BiDirectional leaving solve")
                 return path
 
@@ -166,7 +165,7 @@ class BiDirectional(Solver):
                 path = [p_el for p_tuple in zip(path_kl, path_pq) for p_el in p_tuple]  # Zip paths
                 if not self.quiet_mode:
                     print("Number of moves performed: {}".format(len(path)))
-                    print("Execution time for algorithm: {:.4f}".format(time.clock() - time_start))
+                    print("Execution time for algorithm: {:.4f}".format(time.perf_counter() - time_start))
                 logging.debug("Class BiDirectional leaving solve")
                 return path
 
