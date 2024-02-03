@@ -37,6 +37,28 @@ class Solver(object):
         logging.debug('Class Solver get_path called')
         return self.path
 
+class GeneticAlgorithm(Solver):
+    """A solver that implements a genetic algorithm.
+    """
+
+    def __init__(self, maze, quiet_mode=False,  neighbor_method="fancy"):
+        logging.debug('Class GeneticAlgorithm ctor called')
+
+        super().__init__(maze, neighbor_method, quiet_mode)
+        self.name = "Genetic Alorgithm"
+
+    def solve(self):
+        logging.debug("Class DepthFirstBacktracker solve called")
+        k_curr, l_curr = self.maze.entry_coor      # Where to start searching
+        self.maze.grid[k_curr][l_curr].visited = True     # Set initial cell to visited
+        visited_cells = list()                  # Stack of visited cells for backtracking
+        path = list()                           # To track path of solution and backtracking cells
+        if not self.quiet_mode:
+            print("\nSolving the maze with a genetic algorithm...")
+
+        time_start = time.time()
+        #Use GA class
+        return path
 
 class BreadthFirst(Solver):
 
